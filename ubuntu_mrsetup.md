@@ -1,8 +1,6 @@
----
-title: Neuroimaging Programs Installation Guide on Ubuntu 18.04 LTS
-date: \today
+# Neuroimaging Programs Installation Guide on Ubuntu 18.04 LTS
 author: Tianyi Zhou
----
+
 # Python version management
 
 ## System python on Ubuntu
@@ -11,10 +9,11 @@ This note is a guide to setting up appropriate python version on Ubuntu 18.04 LT
 Ubuntu 18.04 comes with python2.7 and python3.6 by defalt (they are the system python). Open a terminal and type `python2 --version` will give you python2.7, while `python3 --version` will give you python3.6 (version number might be different). Command `python --version` shows the current default python version on you system. Normally the default python version is 2.7. We want to change it to python3.6+ because command `apt-get install` automatically installs packages corresponding to your default python version.
 
 To change default python version, run
-`
+
+```
     sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1
     sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.6 2
-`
+```
 
 Next, we can choose between python alternavies by running this command and entering a selection number:
 `
