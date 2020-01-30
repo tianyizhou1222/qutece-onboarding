@@ -1,6 +1,8 @@
 # Neuroimaging Programs Installation Guide on Ubuntu 18.04 LTS
 author: Tianyi Zhou
 
+---------
+
 # Python version management
 
 ## System python on Ubuntu
@@ -11,26 +13,28 @@ Ubuntu 18.04 comes with python2.7 and python3.6 by defalt (they are the system p
 To change default python version, run
 
 ```
-    sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1
-    sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.6 2
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.6 2
 ```
 
 Next, we can choose between python alternavies by running this command and entering a selection number:
-`
-    sudo update-alternatives --config python
-`
+
+```
+sudo update-alternatives --config python
+```
 
 Actually python3.6 is already set default by previous command because we have specified a priority 2 for python3.6 and priority 1 for python2.7. Command `update-alternatives` set the python version with a higher priority number as default.
 
 From now on, when you use `apt` to install python packages, it automatically downloads the python3 version.
 
-[Reference links for this section] (https://linuxconfig.org/how-to-change-from-default-to-alternative-python-version-on-debian-linux)
+[Reference links for this section](https://linuxconfig.org/how-to-change-from-default-to-alternative-python-version-on-debian-linux)
 
 ## pip and pip3
 First, install pip for python 3 using apt:
-`
-    sudo apt install python3-venv python3-pip
-`
+
+```
+sudo apt install python3-venv python3-pip
+```
 I'm still not clear how pip, pip2 and pip3 works. Just check if `pip` points to python3. Try running `pip --version`, `pip3 --version` to check.
 
 ## conda
@@ -39,58 +43,75 @@ Conda is a package manager developed by Anaconda. After installation, you will h
 To install Ananconda, follow this instruction: [https://docs.anaconda.com/anaconda/install/linux/](https://docs.anaconda.com/anaconda/install/linux/)
 
 Anaconda automatically activates base environment for every newly opend terminal. To turn off this option, run
-`
-    conda config --set auto_activate_base false
-`
+
+```
+conda config --set auto_activate_base false
+```
 
 # Install NeuroImaging softwares
 
 ## NeuroDebian
 NeuroDebian provides some popular neuroscience softwares for easy installation via apt on Debian OS. For Ubuntu 18.04 and a US-NH server, use this command to add NeuroDebian repo to native package mangement system:
 
-`
-    wget -O- http://neuro.debian.net/lists/bionic.us-nh.full | sudo tee /etc/apt/sources.list.d/neurodebian.sources.list
-    sudo apt-key adv --recv-keys --keyserver hkp://pool.sks-keyservers.net:80 0xA5D32F012649A5A9
-`
+```
+wget -O- http://neuro.debian.net/lists/bionic.us-nh.full | sudo tee /etc/apt/sources.list.d/neurodebian.sources.list
+sudo apt-key adv --recv-keys --keyserver hkp://pool.sks-keyservers.net:80 0xA5D32F012649A5A9
+```
+
 Then update the package index:
-`
-    sudo apt-get update
-`
+
+```
+sudo apt-get update
+```
 
 For other OS and different servers, go to [this page](http://neuro.debian.net/)
 
 ## afni(NeuroDebian)
-`
-    sudo apt-get install afni
-`
+
+```
+sudo apt-get install afni
+```
+
 This will automatically install afni into the default directory /usr/bin, not sure how to change that yet.
 And this installs version Debian-18.0.05 while latest version is 20.0.03. might need manual installation as well...
 ## Some python packages
 ### dcm2bids
 Dependency: dcm2niix
-`
-    sudo apt-get install dcm2niix
-`
+
+```
+sudo apt-get install dcm2niix
+```
+
 Install:
-`
-    pip install dcm2bids
-`
+
+```
+pip install dcm2bids
+```
+
 ### nibabel
-`
-    pip install nibabel
-`
+
+```
+pip install nibabel
+```
+
 ### nipype
-`
-    pip install nipype
-`
+
+```
+pip install nipype
+```
+
 ### itk
-`
-    pip install itk
-`
+
+```
+pip install itk
+```
+
 ### python-gdcm
-`
-    sudo apt-get install python-gdcm
-`
+
+```
+sudo apt-get install python-gdcm
+```
+
 ## Other packages requiring manual downloading
 ### afni
 A bunch steps needed for installation. [Here is a detailed step-by-step instruction for Ubuntu 18.04](https://afni.nimh.nih.gov/pub/dist/doc/htmldoc/background_install/install_instructs/steps_linux_ubuntu18.html)
@@ -99,122 +120,158 @@ A bunch steps needed for installation. [Here is a detailed step-by-step instruct
 ### fsl
 + Download installer from [its website](https://fsl.fmrib.ox.ac.uk/fsldownloads_registration)
 + Run installer using python2. `-d` option specifies the directory you want to install into. (This installer will download fsl and then install so it might take some time...)
-`
-    cd ~/Downloads
-    python2 fslinstaller.py -d /opt/fsl
-`
+
+```
+cd ~/Downloads
+python2 fslinstaller.py -d /opt/fsl
+```
 
 ### bart
 + Dependencies
-`
-    sudo apt-get install make gcc libfftw3-dev liblapacke-dev libpng-dev libopenblas-dev
-`
+
+```
+sudo apt-get install make gcc libfftw3-dev liblapacke-dev libpng-dev libopenblas-dev
+```
+
 + Download the package and unzip to installation folder `/opt`
-`
-    cd ~/Downloads
-    wget https://github.com/mrirecon/bart/archive/v0.5.00.tar.gz
-    tar -C /opt -xzvf v0.5.00.tar.gz
-`
+
+```
+cd ~/Downloads
+wget https://github.com/mrirecon/bart/archive/v0.5.00.tar.gz
+tar -C /opt -xzvf v0.5.00.tar.gz
+```
+
 + Compile
-`
-    cd /opt/bart-0.5.00
-    make
-`
+
+```
+cd /opt/bart-0.5.00
+make
+```
 ### freesurfer
 + Downlaod the package and install into `/opt`
-`
-    cd ~/Downloads
-    wget https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/6.0.0/freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.0.tar.gz
-    tar -C /opt -xzvf freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.0.tar.gz
-`
+
+```
+cd ~/Downloads
+wget https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/6.0.0/freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.0.tar.gz
+tar -C /opt -xzvf freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.0.tar.gz
+```
+
 + Setup the environment variable (if your shell is bash). Just add two lines to your .bashrc file(normally in your home directory)
-`
-    export FREESURFER_HOME=/opt/freesurfer
-    source $FREESURFER_HOME/SetUpFreeSurfer.sh
-`
+
+```
+export FREESURFER_HOME=/opt/freesurfer
+source $FREESURFER_HOME/SetUpFreeSurfer.sh
+```
+
 ### ANTs
 + Download the package and install into `/opt`
-`
-    cd ~/Downloads
-    wget https://github.com/ANTsX/ANTs/archive/v2.3.2.tar.gz
-    tar -C /opt -xzvf ANTs-2.3.2.tar.gz
-`
+
+```
+cd ~/Downloads
+wget https://github.com/ANTsX/ANTs/archive/v2.3.2.tar.gz
+tar -C /opt -xzvf ANTs-2.3.2.tar.gz
+```
 
 ### MATLAB
+
 + Go to its website, log in and download the installer
 + In the unzipped folder, run `./install`
 + Change the installation directory to `/opt` and follow the instructions until finished
 + Finally, setup the environment variable so you can call it from terminal easily. Add the following line to your .bashrc file
-`
-    PATH="/opt/MATLAB/R2019b/bin:${PATH}"
-`
+
+```
+PATH="/opt/MATLAB/R2019b/bin:${PATH}"
+```
 
 ### spm12
 + Download [spm12.zip](https://www.fil.ion.ucl.ac.uk/spm/software/download/) and its updates [spm12_updates_rxxxx.zip](https://www.fil.ion.ucl.ac.uk/spm/download/spm12_updates/) in `~/Downloads` then type the following in a Terminal, this will install spm to directory `/opt`:
-`
-    cd ~/Downloads
-    unzip spm12.zip -d /opt
-    unzip -o spm12_updates_rxxxx.zip -d /opt/spm12
-`
+
+```
+cd ~/Downloads
+unzip spm12.zip -d /opt
+unzip -o spm12_updates_rxxxx.zip -d /opt/spm12
+```
+
 + Start MATLAB and add SPM into your path, either using File > Set Path > Add Folder... or typing the following command in MATLAB's workspace.
-`
-    addpath /opt/spm12
-`
+
+```
+addpath /opt/spm12
+```
+
 + In a Terminal, from the src folder of your SPM12 installation, type:
-`
-    cd /opt/spm12/src
-    make distclean
-    make && make install
-    make external-distclean
-    make external && make external-install
-`
+
+```
+cd /opt/spm12/src
+make distclean
+make && make install
+make external-distclean
+make external && make external-install
+```
+
 ### vmtk (using conda - this works)
+
 + Install Ananconda [https://docs.anaconda.com/anaconda/install/linux/](https://docs.anaconda.com/anaconda/install/linux/)
 
 + Install and update anaconda-client
-`
-    conda install anaconda-client
-    conda update conda anaconda-client
-    conda config --set restore_free_channel true
-`
+
+```
+conda install anaconda-client
+conda update conda anaconda-client
+conda config --set restore_free_channel true
+```
+
 + Create a new python environment named vmtk using conda
-`
-    conda create -n vmtk python=3.6
-`
+
+```
+conda create -n vmtk python=3.6
+```
+
 + Activate the environment you just created
-`
-    source activate vmtk
-`
+
+```
+source activate vmtk
+```
+
 + Install vtk from ananconda channel
-`
-    conda install -c anaconda vtk=8.1.0
-`
+
+```
+conda install -c anaconda vtk=8.1.0
+```
+
 + Install itk and vmtk from vmtk channel
-`
-    conda install -c vmtk itk vmtk
-`
+
+```
+conda install -c vmtk itk vmtk
+```
+
 + Notes on installation: vtk on vmtk channel crashes and gives openGL error during rendering. So the workaround is: install vtk from anaconda channel instead, then install itk and vmtk from vmtk channel. [Check the group discussion here.](https://groups.google.com/forum/#!msg/vmtk-users/IbVEv2p64Tc/XWNDt88RAwAJ)
 
 ### vmtk (build-from-source - this doesn't work for now)
 + Prerequisites: git, python, cmake, gcc.
 + For Ubuntu, we also need the following packages. Run
-`
-    sudo apt-get install libxt-dev libgl1-mesa-glx libgl1-mesa-dev libglapi-mesa libosmesa-dev build-essential
-`
+
+```
+sudo apt-get install libxt-dev libgl1-mesa-glx libgl1-mesa-dev libglapi-mesa libosmesa-dev build-essential
+```
+
 + Download the source code using git:
-`
-    cd ~/Downloads
-    mkdir vmtk-source
-    cd vmtk-source
-    git clone https://github.com/vmtk/vmtk.git
-`
+
+```
+cd ~/Downloads
+mkdir vmtk-source
+cd vmtk-source
+git clone https://github.com/vmtk/vmtk.git
+```
+
 + Create a build directory under `/opt` and run cmake with the vmtk-source directory:
-`
-    cd /opt
-    mkdir vmtk
-    cd vmtk
-    cmake ~/Downloads/vmtk-source/vmtk
-    make
-`
+
+```
+cd /opt
+mkdir vmtk
+cd vmtk
+cmake ~/Downloads/vmtk-source/vmtk
+make
+```
+
 + Then it will build itk and vtk, give an error when building vmtk. For now(01-29-2020), there is no obvious workaround for this compiling failure... Check [this page](https://github.com/vmtk/vmtk/issues/341#issuecomment-577912907) for updates on the error.
 
