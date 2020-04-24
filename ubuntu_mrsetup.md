@@ -125,6 +125,15 @@ A bunch steps needed for installation. [Here is a detailed step-by-step instruct
 cd ~/Downloads
 python2 fslinstaller.py -d /opt/fsl
 ```
++ Shell setup: add the following scripts into `~/.bashrc`
+```
+FSLDIR=/opt/fsl
+. ${FSLDIR}/etc/fslconf/fsl.sh
+PATH=${FSLDIR}/bin:${PATH}
+export FSLDIR PATH
+```
+Then don't forget to update the environment by running `source .bashrc` in terminal.
+
 
 ### bart
 + Dependencies
@@ -163,6 +172,8 @@ export FREESURFER_HOME=/opt/freesurfer
 source $FREESURFER_HOME/SetUpFreeSurfer.sh
 ```
 
+Then update the environment by running `source .bashrc` in terminal.
+
 ### ANTs
 + Download the package and install into `/opt`
 
@@ -182,6 +193,7 @@ tar -C /opt -xzvf ANTs-2.3.2.tar.gz
 ```
 PATH="/opt/MATLAB/R2019b/bin:${PATH}"
 ```
++ Update the environment by running `source .bashrc` in terminal.
 
 ### spm12
 + Download [spm12.zip](https://www.fil.ion.ucl.ac.uk/spm/software/download/) and its updates [spm12_updates_rxxxx.zip](https://www.fil.ion.ucl.ac.uk/spm/download/spm12_updates/) in `~/Downloads` then type the following in a Terminal, this will install spm to directory `/opt`:
@@ -207,6 +219,15 @@ make && make install
 make external-distclean
 make external && make external-install
 ```
+
+#### Unring function dependencies
++ This is an optional step (but required in Liam's customized nipype workflow). This is to setup the matlab dependencies for the unring function.
++ 3 major dependencies are required:
+	- unring tool implemented in MATLAB [see codes here](https://github.com/josephdviviano/unring/tree/master/matlab)
+	- Unring_Nii.m (codes written by LT)
+	- get_3D_Unring.m (codes written by LT)
++ Put these dependencies into one folder (e.g. `~/matlab`), and add this folder to matlab path 
+
 
 ### vmtk (using conda - this works)
 
@@ -245,6 +266,8 @@ conda install -c vmtk itk vmtk
 ```
 
 + Notes on installation: vtk on vmtk channel crashes and gives openGL error during rendering. So the workaround is: install vtk from anaconda channel instead, then install itk and vmtk from vmtk channel. [Check the group discussion here.](https://groups.google.com/forum/#!msg/vmtk-users/IbVEv2p64Tc/XWNDt88RAwAJ)
+
++ TODO: how to add vmtk environment into jupyter kernel
 
 ### vmtk (build-from-source - this doesn't work for now)
 + Prerequisites: git, python, cmake, gcc.
