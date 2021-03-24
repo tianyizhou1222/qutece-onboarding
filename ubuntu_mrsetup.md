@@ -226,7 +226,7 @@ make external && make external-install
 	- unring tool implemented in MATLAB [see codes here](https://github.com/josephdviviano/unring/tree/master/matlab)
 	- Unring_Nii.m (codes written by LT)
 	- get_3D_Unring.m (codes written by LT)
-+ Put these dependencies into one folder (e.g. `~/matlab`), and add this folder to matlab path 
++ Put these dependencies into one folder (e.g. `~/matlab`), and add this folder to matlab path
 
 
 ### vmtk (using conda - this works)
@@ -241,10 +241,10 @@ conda update conda anaconda-client
 conda config --set restore_free_channel true
 ```
 
-+ Create a new python environment named vmtk using conda
++ Create a new python environment (version=3.6.1) named vmtk using conda. We are being very specific about the version number (3.6.1 instead of 3.6) because vmtk seems to have issue with python3.6.13, which is the current (Mar24,2021) defualt version under python3.6 installed using conda.
 
 ```
-conda create -n vmtk python=3.6
+conda create -n vmtk python=3.6.1
 ```
 
 + Activate the environment you just created
@@ -267,7 +267,17 @@ conda install -c vmtk itk vmtk
 
 + Notes on installation: vtk on vmtk channel crashes and gives openGL error during rendering. So the workaround is: install vtk from anaconda channel instead, then install itk and vmtk from vmtk channel. [Check the group discussion here.](https://groups.google.com/forum/#!msg/vmtk-users/IbVEv2p64Tc/XWNDt88RAwAJ)
 
-+ TODO: how to add vmtk environment into jupyter kernel
++ To use this vmtk environment within a Jupyter Notebook
+```
+conda activate vmtk
+conda install -c anaconda ipykernel
+ipython kernel install --user --name=vmtk
+```
+
++ To remove this environment
+```
+jupyter kernelspec uninstall vmtk
+```
 
 ### vmtk (build-from-source - this doesn't work for now)
 + Prerequisites: git, python, cmake, gcc.
