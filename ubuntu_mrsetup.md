@@ -48,9 +48,36 @@ Anaconda automatically activates base environment for every newly opend terminal
 conda config --set auto_activate_base false
 ```
 
-# Install NeuroImaging softwares
+# Install Some python packages
+## dcm2niix, python-gdcm
 
-## NeuroDebian
+```
+sudo apt-get install dcm2niix python-gdcm
+```
+
+## Imaging related packages: dcm2bids, nibabel, nipype, itk,
+1. dcm2bids
+2. itk
+3. nibabel
+4. nilearn
+5. nipype
+6. scikit-image
+7. scikit-learn
+
+```
+pip install dcm2bids itk nibabel nipype
+```
+## Genearl packages used in scientific research
+1. numpy
+2. pandas
+3. scipy
+4. matplotlib
+5. seaborn
+```
+pip install numpy pandas scipy matplotlib seaborn
+```
+
+# NeuroDebian
 NeuroDebian provides some popular neuroscience softwares for easy installation via apt on Debian OS. For Ubuntu 18.04 and a US-NH server, use this command to add NeuroDebian repo to native package mangement system:
 
 ```
@@ -74,43 +101,6 @@ sudo apt-get install afni
 
 This will automatically install afni into the default directory /usr/bin, not sure how to change that yet.
 And this installs version Debian-18.0.05 while latest version is 20.0.03. might need manual installation as well...
-## Some python packages
-### dcm2bids
-Dependency: dcm2niix
-
-```
-sudo apt-get install dcm2niix
-```
-
-Install:
-
-```
-pip install dcm2bids
-```
-
-### nibabel
-
-```
-pip install nibabel
-```
-
-### nipype
-
-```
-pip install nipype
-```
-
-### itk
-
-```
-pip install itk
-```
-
-### python-gdcm
-
-```
-sudo apt-get install python-gdcm
-```
 
 ## Other packages requiring manual downloading
 ### afni
@@ -175,13 +165,16 @@ source $FREESURFER_HOME/SetUpFreeSurfer.sh
 Then update the environment by running `source .bashrc` in terminal.
 
 ### ANTs
-+ Download the package and install into `/opt`
++ Download the source code and unzip in `/opt/ants-git`
 
 ```
 cd ~/Downloads
-wget https://github.com/ANTsX/ANTs/archive/v2.3.2.tar.gz
-tar -C /opt -xzvf ANTs-2.3.2.tar.gz
+wget https://github.com/ANTsX/ANTs/archive/v2.3.5.tar.gz
+cd /opt
+mkdir ants-git
+tar -C /opt/ants-git -xzvf ANTs-2.3.2.tar.gz
 ```
++ Compile and install (TODO)
 
 ### MATLAB
 
