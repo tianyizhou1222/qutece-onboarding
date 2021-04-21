@@ -301,3 +301,20 @@ make
 
 + Then it will build itk and vtk, give an error when building vmtk. For now(01-29-2020), there is no obvious workaround for this compiling failure... Check [this page](https://github.com/vmtk/vmtk/issues/341#issuecomment-577912907) for updates on the error.
 
+
+# Other tools
+
+## Syncthing
+
+### Troubleshooting: Recover data from other nodes to a replaced hard drive
+* Create empty folders on new hard drive, with the same path previously set in Syncthing
+* Start syncthing
+* Set the folder type on the local node to "receive-only"
+* Set the folder type on all remote nodes to "send-only", to avoid accidental data lost
+* Quit syncthing and run the following command in Terminal
+
+```
+syncthing -reset-database
+```
+
+* Start syncing
