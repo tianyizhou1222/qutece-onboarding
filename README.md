@@ -165,16 +165,43 @@ source $FREESURFER_HOME/SetUpFreeSurfer.sh
 Then update the environment by running `source .bashrc` in terminal.
 
 ### ANTs
-+ Download the source code and unzip in `/opt/ants-git`
+[Official instruction on compiling ANTs on Linux](https://github.com/ANTsX/ANTs/wiki/Compiling-ANTs-on-Linux-and-Mac-OS)
+
+Use `git clone` instead of `wget` to download the source code to avoid [version number issue](https://github.com/ANTsX/ANTs/issues/1183)
+
++ Make directory and git clone the source code to `/opt/ants-git`
 
 ```
-cd ~/Downloads
-wget https://github.com/ANTsX/ANTs/archive/v2.3.5.tar.gz
 cd /opt
 mkdir ants-git
-tar -C /opt/ants-git -xzvf ANTs-2.3.2.tar.gz
+cd ants-git
+git clone https://github.com/ANTsX/ANTs.git
 ```
-+ Compile and install (TODO)
+
++ Build configuration
+
+```
+mkdir build
+cd build
+cmake \
+    -DCMAKE_INSTALL_PREFIX=/opt/ANTs \
+    ../ANTs 2>&1 | tee cmake.log
+```
+
++ Build step
+
+Using 12 threads to save time:
+
+```
+make -j 12 2>&1 | tee build.log
+```
+
++ Install step
+
+```
+cd ANTS-build
+make install 2>&1 | tee install.log
+```
 
 ### MATLAB
 
