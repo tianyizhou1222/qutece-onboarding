@@ -40,10 +40,10 @@ conda config --set auto_activate_base false
 pip install numpy pandas scipy matplotlib seaborn
 ```
 
-## dcm2niix
+## install dcm2niix and git
 
 ```
-sudo apt-get install dcm2niix
+sudo apt install dcm2niix git
 ```
 
 ## Imaging related packages: dcm2bids, nibabel, nipype, itk,
