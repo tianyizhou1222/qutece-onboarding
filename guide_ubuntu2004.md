@@ -28,6 +28,18 @@ conda config --set auto_activate_base false
 ```
 
 # Install python packages
+
+## Genearl packages used in scientific research
+
+1. numpy
+2. pandas
+3. scipy
+4. matplotlib
+5. seaborn
+```
+pip install numpy pandas scipy matplotlib seaborn
+```
+
 ## dcm2niix
 
 ```
@@ -47,15 +59,46 @@ sudo apt-get install dcm2niix
 ```
 pip install dcm2bids itk nibabel nipype nilearn python-gdcm scikit-image scikit-learn
 ```
-## Genearl packages used in scientific research
-1. numpy
-2. pandas
-3. scipy
-4. matplotlib
-5. seaborn
+
+# ANTs
+[Official instruction on compiling ANTs on Linux](https://github.com/ANTsX/ANTs/wiki/Compiling-ANTs-on-Linux-and-Mac-OS)
+
+Use `git clone` instead of `wget` to download the source code to avoid [version number issue](https://github.com/ANTsX/ANTs/issues/1183)
+
++ Make directory and git clone the source code to `/opt/ants-git`
+
 ```
-pip install numpy pandas scipy matplotlib seaborn
+cd /opt
+mkdir ants-git
+cd ants-git
+git clone https://github.com/ANTsX/ANTs.git
 ```
+
++ Build configuration
+
+```
+mkdir build
+cd build
+cmake \
+    -DCMAKE_INSTALL_PREFIX=/opt/ANTs \
+    ../ANTs 2>&1 | tee cmake.log
+```
+
++ Build step
+
+Using 12 threads to save time:
+
+```
+make -j 12 2>&1 | tee build.log
+```
+
++ Install step
+
+```
+cd ANTS-build
+make install 2>&1 | tee install.log
+```
+**UPDATED TILL THIS POINT**
 
 # NeuroDebian
 NeuroDebian provides some popular neuroscience softwares for easy installation via apt on Debian OS. For Ubuntu 18.04 and a US-NH server, use this command to add NeuroDebian repo to native package mangement system:
@@ -143,45 +186,6 @@ source $FREESURFER_HOME/SetUpFreeSurfer.sh
 ```
 
 Then update the environment by running `source .bashrc` in terminal.
-
-### ANTs
-[Official instruction on compiling ANTs on Linux](https://github.com/ANTsX/ANTs/wiki/Compiling-ANTs-on-Linux-and-Mac-OS)
-
-Use `git clone` instead of `wget` to download the source code to avoid [version number issue](https://github.com/ANTsX/ANTs/issues/1183)
-
-+ Make directory and git clone the source code to `/opt/ants-git`
-
-```
-cd /opt
-mkdir ants-git
-cd ants-git
-git clone https://github.com/ANTsX/ANTs.git
-```
-
-+ Build configuration
-
-```
-mkdir build
-cd build
-cmake \
-    -DCMAKE_INSTALL_PREFIX=/opt/ANTs \
-    ../ANTs 2>&1 | tee cmake.log
-```
-
-+ Build step
-
-Using 12 threads to save time:
-
-```
-make -j 12 2>&1 | tee build.log
-```
-
-+ Install step
-
-```
-cd ANTS-build
-make install 2>&1 | tee install.log
-```
 
 ### MATLAB
 
