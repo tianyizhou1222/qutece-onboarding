@@ -14,7 +14,7 @@ First, install pip for python 3 using apt:
 ```
 sudo apt install python3-venv python3-pip
 ```
-I'm still not clear how pip, pip2 and pip3 works. Just check if `pip` points to python3. Try running `pip --version`, `pip3 --version` to check.
+I'm still not clear how pip and pip3 works. Just check if `pip` points to python3. Try running `pip --version`, `pip3 --version` to check.
 
 ## conda
 Conda is a package manager developed by Anaconda. After installation, you will have a default environment named base, which shows up as `(base)username@computername` when you open a terminal. For the most of the time, the python version in your conda base environment and that in your system are differnt. In my case, my system python is version 3.6.9 while in conda base environment it's version 3.7.4. Also, some neuroimaging analysis tool are not available through conda. Since we don't mess up with different python versions, we avoid using conda as much as possible... But we do need it for vmtk installation.
@@ -27,11 +27,11 @@ Anaconda automatically activates base environment for every newly opend terminal
 conda config --set auto_activate_base false
 ```
 
-# Install Some python packages
-## dcm2niix, python-gdcm
+# Install python packages
+## dcm2niix
 
 ```
-sudo apt-get install dcm2niix python-gdcm
+sudo apt-get install dcm2niix
 ```
 
 ## Imaging related packages: dcm2bids, nibabel, nipype, itk,
@@ -42,9 +42,10 @@ sudo apt-get install dcm2niix python-gdcm
 5. nipype
 6. scikit-image
 7. scikit-learn
+8. gdcm
 
 ```
-pip install dcm2bids itk nibabel nipype
+pip install dcm2bids itk nibabel nipype nilearn python-gdcm scikit-image scikit-learn
 ```
 ## Genearl packages used in scientific research
 1. numpy
